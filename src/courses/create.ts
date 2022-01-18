@@ -8,6 +8,11 @@ async function main() {
       name: "Elixir course",
       description: "Excellent Elixir course",
       duration: 300,
+      teacher: {
+        create: {
+          name: "Raphael Camarda",
+        },
+      },
     },
   });
 
