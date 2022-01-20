@@ -9,8 +9,13 @@ async function main() {
       description: "Excellent Elixir course",
       duration: 300,
       teacher: {
-        create: {
-          name: "Raphael Camarda",
+        connectOrCreate: {
+          where: {
+            name: "Raphael Camarda",
+          },
+          create: {
+            name: "Raphael Camarda",
+          },
         },
       },
     },
