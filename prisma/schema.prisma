@@ -1,3 +1,7 @@
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,16 +12,16 @@ datasource db {
 }
 
 model Courses {
-  id            String   @id @default(uuid())
-  name          String   @unique
-  description   String?
-  duration      Int
-  created_at    DateTime @default(now())
-  fk_id_teacher String   @unique
-  teacher       Teachers @relation(fields: [fk_id_teacher], references: [id])
+  id             String           @id @default(uuid())
+  name           String           @unique
+  description    String?
+  duration       Int
+  created_at     DateTime         @default(now())
+  fk_id_teacher  String           @unique
+  teacher        Teachers         @relation(fields: [fk_id_teacher], references: [id])
+  CoursesModules CoursesModules[]
 
   @@map("courses")
-  CoursesModules CoursesModules[]
 }
 
 model Teachers {
@@ -29,13 +33,13 @@ model Teachers {
 }
 
 model Modules {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  description String
-  created_at  DateTime @default(now())
+  id             String           @id @default(uuid())
+  name           String           @unique
+  description    String
+  created_at     DateTime         @default(now())
+  CoursesModules CoursesModules[]
 
   @@map("modules")
-  CoursesModules CoursesModules[]
 }
 
 model Authors {
@@ -43,6 +47,7 @@ model Authors {
   name String @unique
 
   books Books[]
+
   @@map("authors")
 }
 
@@ -51,7 +56,6 @@ model Books {
   name      String  @unique
   author_id String
   author    Authors @relation(fields: [author_id], references: [id])
-
 
   @@map("books")
 }
